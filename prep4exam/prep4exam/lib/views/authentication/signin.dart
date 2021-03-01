@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:prep4exam/helper/functions.dart';
 import 'package:prep4exam/services/auth.dart';
+import 'package:prep4exam/views/dashboard.dart';
 import 'package:prep4exam/widgets/widgets.dart';
-import 'package:prep4exam/views/signup.dart';
-import 'package:prep4exam/views/home.dart';
+import 'package:prep4exam/views/authentication/signup.dart';
 
 class Signin extends StatefulWidget {
   @override
@@ -13,6 +14,7 @@ class _SiginState extends State<Signin> {
   final _formKey = GlobalKey<FormState>();
   String email, password;
   AuthServices authServices = new AuthServices();
+  HelperFunction helperFunction = new HelperFunction();
   bool _isLoading = false;
 
   signin() async {
@@ -25,8 +27,11 @@ class _SiginState extends State<Signin> {
           setState(() {
             _isLoading = false;
           });
+       
+
+          HelperFunction.saveUserLoggedInDetails(isLoggedin: true);
           Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => Home()));
+              context, MaterialPageRoute(builder: (context) => Dashboard()));
         }
       });
     }
@@ -80,7 +85,7 @@ class _SiginState extends State<Signin> {
                       ),
 
                       SizedBox(
-                        height: 150,
+                        height: 20,
                       ),
 
                       //  for sign in button
@@ -88,20 +93,9 @@ class _SiginState extends State<Signin> {
                         onTap: () {
                           signin();
                         },
-                        child: Container(
-                          alignment: Alignment.center,
-
-                          padding: EdgeInsets.symmetric(vertical: 18),
-                          decoration: BoxDecoration(
-                            color: Colors.blue,
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          // fro takin complete width
-                          width: MediaQuery.of(context).size.width - 48,
-                          child: Text(
-                            "Sign in",
-                            style: TextStyle(color: Colors.white, fontSize: 16),
-                          ),
+                        child: blueButton(
+                          context: context,
+                          label: " Sign in",
                         ),
                       ),
 
@@ -135,7 +129,7 @@ class _SiginState extends State<Signin> {
                       ),
 
                       SizedBox(
-                        height: 80,
+                        height: 40,
                       ),
                     ],
                   ),
