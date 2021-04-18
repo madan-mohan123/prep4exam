@@ -22,7 +22,7 @@ class _SignupState extends State<Signup> {
       setState(() {
         _isLoading = true;
       });
-      authServices.signUpWithEmailAndPassword(email, password).then((val) {
+      authServices.signUpWithEmailAndPassword(email, password,name).then((val) {
         if (val != null) {
           setState(() {
             _isLoading = false;
@@ -40,7 +40,7 @@ class _SignupState extends State<Signup> {
     return Scaffold(
         appBar: AppBar(
           title: appBar(context),
-          backgroundColor: Colors.transparent,
+           backgroundColor: Colors.blueAccent,
           elevation: 0.0,
           brightness: Brightness.light,
         ),

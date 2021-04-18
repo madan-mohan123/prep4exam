@@ -15,15 +15,14 @@ class _CreateQuizState extends State<CreateQuiz> {
 
   String quizImageUrl, quizTitle, quizDescription, quizId;
   DatabaseService databaseService = new DatabaseService();
-  AuthServices authServices=new AuthServices();
- String _useremail = "";
+  AuthServices authServices = new AuthServices();
+  int timer;
+  String _useremail = "";
 
   bool _isLoading = false;
 
   @override
   void initState() {
-   
-
     authServices.getcurrentuser().then((value) {
       setState(() {
         _useremail = value;
@@ -38,13 +37,20 @@ class _CreateQuizState extends State<CreateQuiz> {
         _isLoading = true;
       });
 
-      quizId = randomAlphaNumeric(5);
-      Map<String, String> quizMap = {
+      quizId = randomAlphaNumeric(8);
+      DateTime currentTime = DateTime.now();
+          String cdt = currentTime.day.toString() + " : " +
+              currentTime.month.toString() + " : " + 
+              currentTime.year.toString();
+      Map<String, dynamic> quizMap = {
         "quizId": quizId,
-        "quizImgUrl": quizImageUrl,
         "quizTitle": quizTitle,
         "quizDescription": quizDescription,
-        "email":_useremail
+        "email": _useremail,
+        "flag": false,
+        "timer": timer,
+        "blacklist":[],
+        "date":cdt
       };
       await databaseService.addQuizData(quizMap, quizId).then((val) {
         setState(() {
@@ -52,6 +58,8 @@ class _CreateQuizState extends State<CreateQuiz> {
           Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context) => AddQuestion(quizId)));
         });
+      }).catchError((e) {
+        createQuizOnline();
       });
     }
   }
@@ -61,10 +69,23 @@ class _CreateQuizState extends State<CreateQuiz> {
     return Scaffold(
         appBar: AppBar(
           title: appBar(context),
-          backgroundColor: Colors.transparent,
+          backgroundColor: Colors.blueAccent,
           elevation: 0.0,
           iconTheme: IconThemeData(color: Colors.black87),
           brightness: Brightness.light,
+           actions: [
+            PopupMenuButton<String>(
+              // onSelected: handleClick,
+              itemBuilder: (BuildContext context) {
+                return {'BlackList'}.map((String choice) {
+                  return PopupMenuItem<String>(
+                    value: choice,
+                    child: Text(choice),
+                  );
+                }).toList();
+              },
+            ),
+           ],
         ),
         body: _isLoading
             ? Container(
@@ -78,20 +99,6 @@ class _CreateQuizState extends State<CreateQuiz> {
                   padding: EdgeInsets.symmetric(horizontal: 24),
                   child: Column(
                     children: [
-                      TextFormField(
-                        validator: (val) =>
-                            val.isEmpty ? "Enter image url" : null,
-                        decoration: InputDecoration(
-                          hintText: "Quiz image url",
-                        ),
-                        onChanged: (val) {
-                          //
-                          quizImageUrl = val;
-                        },
-                      ),
-                      SizedBox(
-                        height: 6,
-                      ),
                       TextFormField(
                         validator: (val) =>
                             val.isEmpty ? "Enter Quiz Title" : null,
@@ -115,6 +122,22 @@ class _CreateQuizState extends State<CreateQuiz> {
                         onChanged: (val) {
                           //
                           quizDescription = val;
+                        },
+                      ),
+                      SizedBox(
+                        height: 6,
+                      ),
+                      TextFormField(
+                        validator: (val) =>
+                            val.isEmpty ? "Enter time in minutes" : null,
+                        decoration: InputDecoration(
+                          hintText: "Timer in minutes",
+                        ),
+                        onChanged: (val) {
+                          //if
+                          if (!val.contains(".")) {
+                            timer = int.parse(val);
+                          }
                         },
                       ),
                       Spacer(),

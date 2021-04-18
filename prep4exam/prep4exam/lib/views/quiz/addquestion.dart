@@ -36,6 +36,8 @@ class _AddQuestionState extends State<AddQuestion> {
         setState(() {
           _isLoading = false;
         });
+      }).catchError((e) {
+        uploadQuestionData();
       });
     }
   }

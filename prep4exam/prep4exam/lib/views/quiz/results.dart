@@ -1,19 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:prep4exam/views/quiz/quizHome.dart';
 import 'package:prep4exam/widgets/widgets.dart';
+import 'package:prep4exam/services/database.dart';
 
 class Results extends StatefulWidget {
   final int correct, incorrect, total;
+  final String quizId;
   Results(
-      {@required this.correct, @required this.incorrect, @required this.total});
+      {@required this.correct,
+      @required this.incorrect,
+      @required this.total,
+      @required this.quizId});
+
   @override
   _ResultsState createState() => _ResultsState();
 }
 
 class _ResultsState extends State<Results> {
+  var marks;
+  DatabaseService databaseService = new DatabaseService();
+
+  @override
+  void initState() {
+   var score = databaseService.getquizMarks(widget.quizId);
+    print("lllllllll");
+    print(score);
+    setState(() {
+      marks = score;
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.amber[800],
+      backgroundColor: Colors.pink[400],
       body: Container(
         height: MediaQuery.of(context).size.height,
         child: Center(
@@ -38,7 +59,10 @@ class _ResultsState extends State<Results> {
             ),
             GestureDetector(
                 onTap: () {
-                  Navigator.pop(context);
+                  Navigator.pop(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => Home()));
                 },
                 child: blueButton(
                     context: context,

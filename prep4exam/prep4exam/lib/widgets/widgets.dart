@@ -9,7 +9,7 @@ Widget appBar(BuildContext context) {
         style: TextStyle(fontWeight: FontWeight.w500, color: Colors.black54)),
     TextSpan(
         text: 'Exam',
-        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue)),
+        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
   ])));
 }
 

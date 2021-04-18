@@ -1,5 +1,6 @@
 class User {
   String uid;
   String email;
-  User({this.uid, this.email});
+  String name;
+  User({this.uid, this.email,this.name});
 }
