@@ -20,7 +20,7 @@ B. TECH CSE IIIRD YEAR
 </h5>
 
 # SUBMITTED BY
-1.	Madan Mohan (181500354 -H)                    3. Rajesh Singh(181500548-H)
+1.	Madan Mohan (181500354 -H)                      3. Rajesh Singh(181500548-H)
 2.	Udit Aggarwal (181500765-H)                     4. Bhagat Singh(181500189-B)
 
  
@@ -42,9 +42,9 @@ The basic idea comes for ‘prep4exam’ from covid-19 because it opens new oppo
 # Existing system:
 There are some problems in the existing system for example we went to the different platform for different type exams practice like ‘Myquizz.com’ keep practice only quizzes, but if we want make   a poll for voting then we require different platform. So, entire redundancy makes disorder practice.
 
+<p align="center">Table 1.1</p>
 <table align="center"> 
-	<caption align="center">Table 1.1</caption>
-	<th style="background-color:red">Existing system</th>
+	<th >Existing system</th>
 	<th>Prep4Exam</th>
 	<tr>
 		<td>It is web based application</td>
