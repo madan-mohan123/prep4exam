@@ -1,8 +1,8 @@
-# prep4exam
-
-“PREP4EXAM”
+# “PREP4EXAM”
 PROJECT SYNOPSIS
 OF PROJECT-II (CSE)
+
+![alt text](https://upload.wikimedia.org/wikipedia/en/4/42/GLA_University_logo.png)
 
 BACHELLOR OF TECHNOLOGY
 B. TECH CSE IIIRD YEAR
