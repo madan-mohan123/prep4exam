@@ -43,8 +43,8 @@ The basic idea comes for ‘prep4exam’ from covid-19 because it opens new oppo
 There are some problems in the existing system for example we went to the different platform for different type exams practice like ‘Myquizz.com’ keep practice only quizzes, but if we want make   a poll for voting then we require different platform. So, entire redundancy makes disorder practice.
 
 <table align="center"> 
-	<caption>Table 1.1</caption>
-	<th>Existing system></th>
+	<caption align="center">Table 1.1</caption>
+	<th style="background-color:red">Existing system</th>
 	<th>Prep4Exam</th>
 	<tr>
 		<td>It is web based application</td>
