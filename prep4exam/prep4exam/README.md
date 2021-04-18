@@ -42,35 +42,27 @@ The basic idea comes for ‘prep4exam’ from covid-19 because it opens new oppo
 # Existing system:
 There are some problems in the existing system for example we went to the different platform for different type exams practice like ‘Myquizz.com’ keep practice only quizzes, but if we want make   a poll for voting then we require different platform. So, entire redundancy makes disorder practice.
 
-<table> 
-	<th>EXaisting system></th>
+<table align="center"> 
+	<caption>Table 1.1</caption>
+	<th>Existing system></th>
 	<th>Prep4Exam</th>
-	<tr><td>It is web based application</td>
+	<tr>
+		<td>It is web based application</td>
 		<td>It is android application </td>
 	</tr>
+	<tr>
+		<td>Choose different platform for different exam practice</td>
+		<td>Require single platform various exam practice </td>
+	</tr>
+	<tr>
+		<td>Require laptop or pc for better experience</td>
+		<td>Require android or ios cell phone</td>
+	</tr>
+	<tr>
+		<td>Easy to use but not portable.</td>
+		<td>Easy to use and portable.</td>
+	</tr>
 </table>
-Table 1.1
-
-Existing system	
-Prep4Exam
-
-It is web based application	
-It is android application
-
-Choose different platform for different exam practice	
-Require single platform various exam practice 
-
-Require laptop or pc for better experience	
-Require android or ios cell phone
-
-Easy to use but not portable.	
-Easy to use and portable.
-
-
-
-
-
-
 
 # PROBLEM DEFINITION
 # Introduction
