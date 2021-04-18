@@ -1,11 +1,14 @@
 # “PREP4EXAM”
-PROJECT SYNOPSIS
-OF PROJECT-II (CSE)
+- PROJECT SYNOPSIS
+- OF PROJECT-II (CSE)
 
 ![alt text](https://upload.wikimedia.org/wikipedia/en/4/42/GLA_University_logo.png)
 
-BACHELLOR OF TECHNOLOGY
-B. TECH CSE IIIRD YEAR
+<p align="center">
+ BACHELLOR OF TECHNOLOGY   
+</p>
+
+- B. TECH CSE IIIRD YEAR
 
 # SUBMITTED BY
 1.	Madan Mohan (181500354 -H)                    3. Rajesh Singh(181500548-H)
