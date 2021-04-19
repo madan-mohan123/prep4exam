@@ -371,11 +371,11 @@ class _PollTileAdminState extends State<PollTileAdmin> {
     );
     Widget continueButton = FlatButton(
       child: Text("Ok"),
-      onPressed: () {
+      onPressed: () async{
         Firestore.instance.collection("pollcreate").document(poll).delete();
 
         ShowAlertDialogs showAlertDialogs = new ShowAlertDialogs();
-        showAlertDialogs.showAlertDialog(context, "Poll Successfully Deleted");
+        await showAlertDialogs.showAlertDialog(context, "Poll Successfully Deleted");
         Navigator.of(context).pop();
       },
     );

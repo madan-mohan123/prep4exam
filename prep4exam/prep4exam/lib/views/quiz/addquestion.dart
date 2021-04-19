@@ -58,7 +58,12 @@ class _AddQuestionState extends State<AddQuestion> {
                 child: CircularProgressIndicator(),
               ),
             )
-          : Form(
+          : ListView(
+            
+            children:[
+            Container(
+              child:
+            Form(
               key: _formKey,
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 24),
@@ -125,7 +130,9 @@ class _AddQuestionState extends State<AddQuestion> {
                         option4 = val;
                       },
                     ),
-                    Spacer(),
+                     SizedBox(
+                      height: 15,
+                    ),
                     Row(
                       children: [
                         GestureDetector(
@@ -161,7 +168,7 @@ class _AddQuestionState extends State<AddQuestion> {
                   ],
                 ),
               ),
-            ),
+            ),)],)
     );
   }
 }

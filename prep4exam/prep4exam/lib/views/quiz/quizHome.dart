@@ -135,8 +135,10 @@ class _HomeState extends State<Home> {
                           });
                           if (!alreadyexist) {
                             DateTime currentTime = DateTime.now();
-                            String cdt = currentTime.day.toString() + " : " +
-                                currentTime.month.toString() + " : " +
+                            String cdt = currentTime.day.toString() +
+                                " : " +
+                                currentTime.month.toString() +
+                                " : " +
                                 currentTime.year.toString();
                             Map<String, dynamic> data = {
                               "quizId": joinquizId,
@@ -146,9 +148,9 @@ class _HomeState extends State<Home> {
                               "attempt": "",
                               "date": cdt
                             };
-                           await databaseService.joinQuiz(data, joinquizId);
+                            await databaseService.joinQuiz(data, joinquizId);
 
-                           await showAlertDialogs.showAlertDialog(
+                            await showAlertDialogs.showAlertDialog(
                                 context, "You Have Successfully Joined");
                             Navigator.pop(context);
                           } else {
@@ -500,9 +502,11 @@ class _QuizTileJoinState extends State<QuizTileJoin> {
                               ),
                             ),
                             Container(
-                              margin: EdgeInsets.fromLTRB(8, 8, 4, 8)  ,
+                              margin: EdgeInsets.fromLTRB(8, 8, 4, 8),
                               child: Text(
-                                "Score: " + widget.score + "  Date: ${widget.date}",
+                                "Score: " +
+                                    widget.score +
+                                    "  Date: ${widget.date}",
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 17,
@@ -565,6 +569,8 @@ class _QuizTileAdminState extends State<QuizTileAdmin> {
 
         await showAlertDialogs.showAlertDialog(
             context, "Quiz Successfully Deleted");
+
+        Navigator.pop(context);
       },
     );
     // set up the AlertDialog
