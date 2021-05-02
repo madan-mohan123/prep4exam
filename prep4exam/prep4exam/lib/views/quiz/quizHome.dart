@@ -199,7 +199,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-          title: appBar(context),
+          title: _selectquizcretedorjoin == "Assigned" ? Text("Joined Quizez") : Text("Created Quizez") ,
           backgroundColor: Colors.blueAccent,
           elevation: 0.0,
           brightness: Brightness.light,

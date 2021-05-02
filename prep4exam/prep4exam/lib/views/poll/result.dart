@@ -25,7 +25,7 @@ class _ResultPollState extends State<ResultPoll> {
   Widget build(BuildContext context) {
     try {
       return Scaffold(
-          backgroundColor: Colors.white60,
+          backgroundColor: Colors.white,
           appBar: AppBar(
               title: Text('Poll Result'),
               backgroundColor: Colors.blueAccent,
@@ -91,7 +91,7 @@ class _ResultTileState extends State<ResultTile> {
   void initState() {
     databaseService.getProfile().then((value) {
       setState(() {
-        userFirstLetter = value["email"].substring(0, 1).toUpperCase();
+        userFirstLetter = value["email"].substring(0, 2).toUpperCase();
       });
     });
     super.initState();
@@ -106,7 +106,7 @@ class _ResultTileState extends State<ResultTile> {
                 margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 2.0),
                 padding: EdgeInsets.all(2.0),
                 decoration: new BoxDecoration(
-                  color: Colors.white,
+                  color: Colors.yellow[900],
                   borderRadius: BorderRadius.all(
                     Radius.circular(10.0),
                   ),
@@ -114,11 +114,11 @@ class _ResultTileState extends State<ResultTile> {
                     BoxShadow(
                       color: Colors.blueGrey.shade50,
                       offset: const Offset(
-                        1.0,
-                        1.0,
+                        0.0,
+                        0.0,
                       ),
                       blurRadius: 0.0,
-                      spreadRadius: 1.0,
+                      spreadRadius: 0.0,
                     ), //BoxShadow
                   ],
                 ),
@@ -130,7 +130,7 @@ class _ResultTileState extends State<ResultTile> {
                         child: ListTile(
                           title: Text("$userFirstLetter : ${widget.mailid}",
                               style: TextStyle(
-                                  color: Colors.black45,
+                                  color: Colors.indigo[700],
                                   fontSize: 18,
                                   fontWeight: FontWeight.w600)),
                           subtitle: Text("Reply: ${widget.response}"),

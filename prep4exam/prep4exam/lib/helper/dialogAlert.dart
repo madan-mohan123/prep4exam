@@ -8,7 +8,7 @@ class ShowAlertDialogs {
     Widget continueButton = FlatButton(
       child: Text("Ok"),
       onPressed: () {
-        Navigator.of(context).pop();
+        Navigator.pop(context);
       },
     );
     // set up the AlertDialog

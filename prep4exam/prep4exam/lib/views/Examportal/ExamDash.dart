@@ -309,7 +309,9 @@ class _ExamdashState extends State<Examdash> {
                             .then((value) {
                           value.documents.forEach((documentSnapshot) {
                             if (documentSnapshot.exists) {
-                              alreadyexist = true;
+                              setState(() {
+                                alreadyexist = true;
+                              });
                             }
                           });
                         });

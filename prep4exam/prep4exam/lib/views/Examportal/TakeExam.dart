@@ -256,8 +256,10 @@ class _TakeExamState extends State<TakeExam> {
     if(submit){
       await showAlertDialogs.showAlertDialog(
           context, "Your Response Successfuly Submitted");
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => Examdash()));
+      // Navigator.pushReplacement(
+      //     context, MaterialPageRoute(builder: (context) => Examdash()));
+      Navigator.pop(context);
+                  Navigator.pushNamed(context, '/Dash');
     }
   }
 }

@@ -244,8 +244,10 @@ class _MyFormState extends State<MyForm> {
         onPressed: () async {
           formId = randomAlphaNumeric(5);
           DateTime currentTime = DateTime.now();
-          String cdt = currentTime.day.toString() + " : "+ 
-              currentTime.month.toString() + " : " +
+          String cdt = currentTime.day.toString() +
+              " : " +
+              currentTime.month.toString() +
+              " : " +
               currentTime.year.toString();
           Map<String, dynamic> myform = {
             "formId": formId,
@@ -253,16 +255,19 @@ class _MyFormState extends State<MyForm> {
             "formDesc": formDesc,
             "formData": formfieldlist,
             "email": useremail,
-            "date":cdt
+            "date": cdt
           };
           ShowAlertDialogs showAlertDialogs = new ShowAlertDialogs();
 
           await databaseService.addForm(myform, formId).then((value) {
             showAlertDialogs.showAlertDialog(
                 context, "Form successfully created");
-            Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (context) => FormDash()));
+            Navigator.pop(context);
+            // Navigator.pushReplacement(
+            //     context, MaterialPageRoute(builder: (context) => FormDash()));
+            Navigator.pushNamed(context, '/Dash');
           }).catchError((e) {
+           
             showAlertDialogs.showAlertDialog(
                 context, "Your Internet connection is slow");
           });

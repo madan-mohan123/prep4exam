@@ -184,7 +184,7 @@ class _PollDashboardState extends State<PollDashboard> {
       return Scaffold(
         backgroundColor: Colors.blueGrey.shade50,
         appBar: AppBar(
-            title: Text('Poll Dashpboard'),
+            title:_selectpollcretedorjoin == "Assigned"? Text('Joined Polls'): Text('Created Polls'),
             backgroundColor: Colors.blueAccent,
             elevation: 0.0,
             brightness: Brightness.light,
@@ -373,16 +373,13 @@ class _PollTileAdminState extends State<PollTileAdmin> {
       child: Text("Ok"),
       onPressed: () async{
         Firestore.instance.collection("pollcreate").document(poll).delete();
-
-        ShowAlertDialogs showAlertDialogs = new ShowAlertDialogs();
-        await showAlertDialogs.showAlertDialog(context, "Poll Successfully Deleted");
-        Navigator.of(context).pop();
+         Navigator.pop(context);
       },
     );
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
       title: Text(
-        "AlertDialog",
+        "Warning ! ",
         style: TextStyle(fontSize: 20.0),
       ),
       content: Text("Would you like to Delete this poll " + poll),
@@ -447,14 +444,14 @@ class _PollTileAdminState extends State<PollTileAdmin> {
                                     mainAxisSize: MainAxisSize.min,
                                     children: <Widget>[
                                       Text(
-                                        "Id: ${widget.pollId}",
+                                        "ID: ${widget.pollId}",
                                         style: TextStyle(
                                             color: Colors.black45,
                                             fontSize: 18,
                                             fontWeight: FontWeight.w600),
                                       ),
                                       SizedBox(
-                                        height: 20,
+                                        height: 10,
                                       ),
                                       Text(
                                         widget.desc,
@@ -650,19 +647,19 @@ class _PollTileState extends State<PollTile> {
               Container(
                 padding: EdgeInsets.all(8.0),
                 decoration: new BoxDecoration(
-                  color: Colors.white,
+                  color: Colors.indigo[600],
                   borderRadius: BorderRadius.all(
                     Radius.circular(10.0),
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.blueGrey[300],
+                      color: Colors.blue,
                       offset: const Offset(
                         0.0,
                         0.0,
                       ),
                       blurRadius: 0.0,
-                      spreadRadius: 1.0,
+                      spreadRadius: 0.0,
                     ), //BoxShadow
                     //                     //BoxShadow
                   ],
@@ -684,23 +681,23 @@ class _PollTileState extends State<PollTile> {
                     Text(
                       "Date: ${widget.date}",
                       style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 15,
+                          color: Colors.white,
+                          fontSize: 19,
                           ),
                     ),
                     SizedBox(
-                      height: 12,
+                      height: 6,
                     ),
                     Text(
                       "Q. ${widget.desc}",
                       style: TextStyle(
-                          color: Colors.black,
+                          color: Colors.white,
                           fontSize: 15,
                           fontWeight: FontWeight.w500),
                     ),
                     
                     SizedBox(
-                      height: 12,
+                      height: 6,
                     ),
                   ],
                 ),

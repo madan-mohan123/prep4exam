@@ -37,6 +37,8 @@ class _ExamConductState extends State<ExamConduct> {
     authServices.getcurrentuser().then((value) {
       setState(() {
         _useremail = value;
+        sections.addAll({"section": "", "marks": ""});
+        examQuestionlist.clear();
       });
     });
 
@@ -86,7 +88,7 @@ class _ExamConductState extends State<ExamConduct> {
   String sectionvalueonok = "";
   String sectionMarks = "";
 
-  sectionvalues(String secval,String sectionMarks) {
+  sectionvalues(String secval, String sectionMarks) {
     checkingvariable = 0;
 
     if (checkingvariable2 == 0) {
@@ -109,14 +111,10 @@ class _ExamConductState extends State<ExamConduct> {
         return Container(
           child: new AlertDialog(
             contentPadding: const EdgeInsets.all(16.0),
-            content: new ListView(
-              shrinkWrap: true,
-              children:[
-             
-             new Column(
-              children: <Widget>[
-               
-                   new TextField(
+            content: new ListView(shrinkWrap: true, children: [
+              new Column(
+                children: <Widget>[
+                  new TextField(
                     autofocus: true,
                     decoration: new InputDecoration(
                         labelText: 'Section Name', hintText: 'eg. xxxxx'),
@@ -128,10 +126,10 @@ class _ExamConductState extends State<ExamConduct> {
                       }
                     },
                   ),
-                SizedBox(
-                      height: 10.0,
-                    ),
-                 new TextField(
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  new TextField(
                     autofocus: true,
                     decoration: new InputDecoration(
                         labelText: 'Each Question Marks', hintText: 'eg. 05'),
@@ -142,11 +140,10 @@ class _ExamConductState extends State<ExamConduct> {
                         });
                       }
                     },
-                  
-                )
-              ],
-            ),
-              ]),
+                  )
+                ],
+              ),
+            ]),
             actions: <Widget>[
               new ElevatedButton(
                   child: const Text('CANCEL'),
@@ -156,7 +153,7 @@ class _ExamConductState extends State<ExamConduct> {
               new ElevatedButton(
                   child: const Text('Ok'),
                   onPressed: () async {
-                    sectionvalues(sectionvalueonok,sectionMarks);
+                    sectionvalues(sectionvalueonok, sectionMarks);
                     Navigator.pop(context);
                   })
             ],
@@ -261,7 +258,8 @@ class _ExamConductState extends State<ExamConduct> {
           enableSuggestions: true,
           controller: eCtrl,
           onChanged: (val) {
-            if (sections["section"] == "" || sections["marks"]=="") {
+            print(sections);
+            if (sections["section"] == "" || sections["marks"] == "") {
               _showDialog();
             }
           },
@@ -516,6 +514,7 @@ class _PreviewState extends State<Preview> {
       urli = List<Map<String, dynamic>>.from(
           storageinfoobject.getexamquestionlist());
     });
+    print(urli);
 
     super.initState();
   }
@@ -741,9 +740,10 @@ class _PreviewState extends State<Preview> {
 
                 examQuestionlist.clear();
                 sections.clear();
-
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => Examdash()));
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, '/Dash');
+                // Navigator.pushReplacement(context,
+                //     MaterialPageRoute(builder: (context) => Examdash()));
               }).catchError((e) {
                 showAlertDialogs.showAlertDialog(
                     context, "Your Internet Connection is Slow");
@@ -779,6 +779,7 @@ class Storageinfo {
   }
 
   setexamquestionlist(Map<String, dynamic> data) {
+   
     for (int i = 0; i < examQuestionlist.length; i++) {
       if (examQuestionlist[i].values.toList()[0] ==
           sections.values.toList()[0]) {
@@ -792,7 +793,8 @@ class Storageinfo {
     if (va == 0) {
       mylast.addAll({
         "section": sections.values.toList()[0],
-        "data": List<Map<String, dynamic>>.from(sections.values.toList()[2])
+        "data": List<Map<String, dynamic>>.from(sections.values.toList()[2]),
+        "marks": sections.values.toList()[1],
       });
 
       examQuestionlist.add(mylast);

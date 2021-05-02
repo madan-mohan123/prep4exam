@@ -22,7 +22,7 @@ class _ResultsState extends State<Results> {
 
   @override
   void initState() {
-   var score = databaseService.getquizMarks(widget.quizId);
+    var score = databaseService.getquizMarks(widget.quizId);
     print("lllllllll");
     print(score);
     setState(() {
@@ -59,10 +59,10 @@ class _ResultsState extends State<Results> {
             ),
             GestureDetector(
                 onTap: () {
-                  Navigator.pop(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => Home()));
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, '/QuizHome');
+                  // Navigator.pop(
+                  //     context, MaterialPageRoute(builder: (context) => Home()));
                 },
                 child: blueButton(
                     context: context,

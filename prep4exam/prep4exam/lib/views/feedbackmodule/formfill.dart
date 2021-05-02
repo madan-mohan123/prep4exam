@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:prep4exam/helper/dialogAlert.dart';
 import 'package:prep4exam/services/auth.dart';
 import 'package:prep4exam/services/database.dart';
-import 'package:prep4exam/views/feedbackmodule/formdash.dart';
+
 import 'package:prep4exam/widgets/widgets.dart';
 
 Map<String, dynamic> _mymap = {};
@@ -64,11 +64,31 @@ class _MyFormFillState extends State<MyFormFill> {
             Column(
               children: <Widget>[
                 Container(
-                    margin: EdgeInsets.fromLTRB(15, 10, 15, 5),
+                   decoration: new BoxDecoration(
+            color: Colors.blueGrey[700],
+            borderRadius: BorderRadius.all(
+              Radius.circular(10.0),
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.blueGrey.shade50,
+                offset: const Offset(
+                  1.0,
+                  1.0,
+                ),
+                blurRadius: 0.0,
+                spreadRadius: 1.0,
+              ), //BoxShadow
+              //                     //BoxShadow
+            ],
+          ),
+                  
+                    margin: EdgeInsets.fromLTRB(6, 10, 6, 5),
+                    padding: EdgeInsets.all(5),
                     child: Text(
                       widget.formName,
                       style: TextStyle(
-                          fontSize: 20.0, fontWeight: FontWeight.w500),
+                          fontSize: 20.0, fontWeight: FontWeight.w500,color:Colors.white),
                     )),
                 Container(
                     margin: EdgeInsets.fromLTRB(15, 10, 15, 5),
@@ -79,7 +99,7 @@ class _MyFormFillState extends State<MyFormFill> {
                 Container(
                     margin: EdgeInsets.fromLTRB(15, 5, 15, 5),
                     child: Text(
-                      widget.formCreatedMail,
+                      "*Email: $useremail",
                       style:
                           TextStyle(fontSize: 20.0, color: Colors.blueAccent),
                     )),
@@ -87,8 +107,7 @@ class _MyFormFillState extends State<MyFormFill> {
                   height: 3.0,
                   color: Colors.grey,
                 ),
-                // new Expanded(
-                //     child:
+              
                 new ListView.builder(
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
@@ -151,13 +170,14 @@ class _MyFormFillState extends State<MyFormFill> {
                   showAlertDialogs.showAlertDialog(
                       context, "Your Response Successfuly Submitted");
 
-                  // print("sucec");
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, '/Dash');
                 }).catchError((e) {
                   showAlertDialogs.showAlertDialog(
                       context, "Your Internet connection is Slow ! ");
                 });
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => FormDash()));
+                // Navigator.pushReplacement(context,
+                //     MaterialPageRoute(builder: (context) => FormDash()));
               },
               label: const Text('Done'),
               icon: const Icon(Icons.send),

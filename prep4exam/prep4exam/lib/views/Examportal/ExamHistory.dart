@@ -61,7 +61,9 @@ class _ExamHistoryState extends State<ExamHistory> {
     return Scaffold(
       backgroundColor: Colors.blueGrey.shade50,
       appBar: AppBar(
-          title: Text("Exam History"),
+          title: _selectoptionforshowexam == "Assigned"
+              ? Text("Joined Exams")
+              : Text("Created Exams"),
           backgroundColor: Colors.blueAccent,
           elevation: 0.0,
           brightness: Brightness.light,
@@ -215,7 +217,7 @@ class _CreatedExamsState extends State<CreatedExams> {
         myminutes = minutes.toString();
       }
       if (hours > 12) {
-        hours = 24 - 12;
+        hours = hours - 12;
         if (hours.toString().length == 1) {
           myhours = "0" + hours.toString();
           mydate = myhours + " : " + myminutes + " PM";
@@ -591,7 +593,7 @@ class _AssignedExamsState extends State<AssignedExams> {
         myminutes = minutes.toString();
       }
       if (hours > 12) {
-        hours = 24 - 12;
+        hours = hours - 12;
         if (hours.toString().length == 1) {
           myhours = "0" + hours.toString();
           mydate = myhours + " : " + myminutes + " PM";
@@ -617,30 +619,27 @@ class _AssignedExamsState extends State<AssignedExams> {
     return Container(
         child: GestureDetector(
       onTap: () {
-        DateTime currentTimedate = DateTime.now();
-        String mydate = currentTimedate.day.toString() +
-            currentTimedate.month.toString() +
-            currentTimedate.year.toString();
-        String mytime =
-            currentTimedate.hour.toString() + currentTimedate.minute.toString();
-
-        String examtimedate = widget.examDate.day.toString() +
-            widget.examDate.month.toString() +
-            widget.examDate.year.toString();
-        String examstart = widget.examStartTime.hour.toString() +
-            widget.examStartTime.month.toString();
-            
-        if (mydate == examtimedate &&
-            mytime == examstart) {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => TakeExam(
-                        examId: widget.examId,
-                        examName: widget.examName,
-                        admin: false,
-                        examDuration: widget.examDuration,
-                      )));
+        DateTime currentTimedate = new DateTime.now();
+        DateTime examdate = widget.examDate;
+        DateTime starttime = widget.examStartTime;
+        DateTime currexamstarttime = new DateTime.now();
+        if (examdate.difference(currentTimedate).inDays <= 0) {
+          if ((((starttime.hour * 60) + starttime.minute) -
+                  ((currexamstarttime.hour * 60) + currexamstarttime.minute) <=
+              0)) {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => TakeExam(
+                          examId: widget.examId,
+                          examName: widget.examName,
+                          admin: false,
+                          examDuration: widget.examDuration,
+                        )));
+          } else {
+            ShowAlertDialogs ob = new ShowAlertDialogs();
+            ob.showAlertDialog(context, "Exam is Not start Now By Admin");
+          }
         } else {
           ShowAlertDialogs ob = new ShowAlertDialogs();
           ob.showAlertDialog(context, "Exam is Not start Now By Admin");
@@ -672,7 +671,7 @@ class _AssignedExamsState extends State<AssignedExams> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15.0),
                 ),
-                color: Colors.green,
+                color: Colors.red[800],
                 elevation: 10,
                 child: Center(
                   child: Column(
@@ -684,7 +683,7 @@ class _AssignedExamsState extends State<AssignedExams> {
                       Container(
                         margin: EdgeInsets.all(8),
                         child: Text(
-                          widget.examName,
+                          "Subject: ${widget.examName}",
                           style: TextStyle(
                               fontSize: 20.0,
                               color: Colors.orange,

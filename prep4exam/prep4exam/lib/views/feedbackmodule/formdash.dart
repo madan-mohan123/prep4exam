@@ -174,7 +174,7 @@ class _FormDashState extends State<FormDash> {
     return Scaffold(
       backgroundColor: Colors.blueGrey.shade50,
       appBar: AppBar(
-          title: Text('Forms'),
+          title: _createjoinedform == "Assigned" ?Text('Joined Forms') :Text('Created Forms') ,
           backgroundColor: Colors.blueAccent,
           elevation: 0.0,
           brightness: Brightness.light,
@@ -350,6 +350,7 @@ class _CreatedFormsState extends State<CreatedForms> {
           value.documents.forEach((documentSnapshot) {
             documentSnapshot.reference.delete();
             showAlertDialogs.showAlertDialog(context, "Successfully Deleted");
+            Navigator.of(context).pop();
           });
         }).catchError((e) {
           showAlertDialogs.showAlertDialog(context, "slow Internet connection");

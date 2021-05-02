@@ -29,60 +29,60 @@ class _PollCreateState extends State<PollCreate> {
     super.initState();
   }
 
-  _showDialog() async {
-    await showDialog<String>(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            contentPadding: const EdgeInsets.all(16.0),
-            content: new Row(
-              children: <Widget>[
-                new Expanded(
-                  child: new TextField(
-                    autofocus: true,
-                    decoration: new InputDecoration(
-                        labelText: 'Enter Poll Question',
-                        hintText: 'eg. xxxxx'),
-                    onChanged: (val) {
-                      pollquestion = val;
-                    },
-                  ),
-                )
-              ],
-            ),
-            actions: <Widget>[
-              new FlatButton(
-                  child: const Text('CANCEL'),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  }),
-              new FlatButton(
-                  child: const Text('Ok'),
-                  onPressed: () async {
-                    pollId = randomAlphaNumeric(5);
-                    DateTime currentTime = DateTime.now();
-          String cdt = currentTime.day.toString() + " : "+
-              currentTime.month.toString() + " : " +
-              currentTime.year.toString();
-                    Map<String, dynamic> pollMap = {
-                      "pollId": pollId,
-                      "pollDesc": pollquestion,
-                      "email": _email,
-                      "votes": "0/0",
-                      "date":cdt
-                    };
-                    await databaseService.createPoll(pollMap, pollId);
-                    Navigator.pop(context);
-                  })
-            ],
-          );
-        });
-  }
+  // _showDialog() async {
+  //   await showDialog<String>(
+  //       context: context,
+  //       builder: (context) {
+  //         return AlertDialog(
+  //           contentPadding: const EdgeInsets.all(16.0),
+  //           content: new Row(
+  //             children: <Widget>[
+  //               new Expanded(
+  //                 child: new TextField(
+  //                   autofocus: true,
+  //                   decoration: new InputDecoration(
+  //                       labelText: 'Enter Poll Question',
+  //                       hintText: 'eg. xxxxx'),
+  //                   onChanged: (val) {
+  //                     pollquestion = val;
+  //                   },
+  //                 ),
+  //               )
+  //             ],
+  //           ),
+  //           actions: <Widget>[
+  //             new FlatButton(
+  //                 child: const Text('CANCEL'),
+  //                 onPressed: () {
+  //                   Navigator.pop(context);
+  //                 }),
+  //             new FlatButton(
+  //                 child: const Text('Ok'),
+  //                 onPressed: () async {
+  //                   pollId = randomAlphaNumeric(5);
+  //                   DateTime currentTime = DateTime.now();
+  //         String cdt = currentTime.day.toString() + " : "+
+  //             currentTime.month.toString() + " : " +
+  //             currentTime.year.toString();
+  //                   Map<String, dynamic> pollMap = {
+  //                     "pollId": pollId,
+  //                     "pollDesc": pollquestion,
+  //                     "email": _email,
+  //                     "votes": "0/0",
+  //                     "date":cdt
+  //                   };
+  //                   await databaseService.createPoll(pollMap, pollId);
+  //                   Navigator.pop(context);
+  //                 })
+  //           ],
+  //         );
+  //       });
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-         backgroundColor: Colors.white60,
+         backgroundColor: Colors.white,
         appBar: AppBar(
          title: appBar(context),
           backgroundColor: Colors.blueAccent,
@@ -97,20 +97,19 @@ class _PollCreateState extends State<PollCreate> {
             child: Column(
               children: [
                 TextFormField(
-                  validator: (val) => val.isEmpty ? "Enter Poll" : null,
+                  validator: (val) => val.isEmpty ? "Enter Poll Question" : null,
                   decoration: InputDecoration(
-                    hintText: "Poll",
+                    hintText: "Enter Poll Question!",
                   ),
                   onChanged: (val) {
-                    //
                     pollquestion = val;
                   },
                 ),
                 SizedBox(height: 20.0),
                 GestureDetector(
                   onTap: () {
-                    // pollCreate();
-                    _showDialog();
+                    pollCreate();
+                    // _showDialog();
                   },
                   child: blueButton(
                     context: context,
@@ -126,19 +125,22 @@ class _PollCreateState extends State<PollCreate> {
   pollCreate() async {
     if (_formKey.currentState.validate()) {
       setState(() {
-        // _isLoading = true;
+       
       });
-
-      pollId = randomAlphaNumeric(8);
-      Map<String, dynamic> pollMap = {
-        "pollId": pollId,
-        "pollDesc": pollquestion,
-        "email": _email,
-        "votes": "0/0"
-      };
+          pollId = randomAlphaNumeric(5);
+          DateTime currentTime = DateTime.now();
+          String cdt = currentTime.day.toString() + " : "+
+          currentTime.month.toString() + " : " +
+          currentTime.year.toString();
+                Map<String, dynamic> pollMap = {
+                  "pollId": pollId,
+                  "pollDesc": pollquestion,
+                  "email": _email,
+                  "votes": "0/0",
+                  "date":cdt
+                };
       await databaseService.createPoll(pollMap, pollId).then((val) {
         setState(() {
-          // _isLoading = false;
           Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context) => PollDashboard()));
         });

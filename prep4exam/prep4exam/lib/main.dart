@@ -4,7 +4,10 @@ import 'package:prep4exam/views/dashboard.dart';
 import 'package:prep4exam/views/authentication/signin.dart';
 // import 'package:animated_splash_screen/animated_splash_screen.dart';
 // import 'package:page_transition/page_transition.dart';
-// import 'package:prep4exam/views/quiz/quizHome.dart';
+import 'package:prep4exam/views/quiz/quizHome.dart';
+import 'package:prep4exam/views/poll/polldashboard.dart';
+import 'package:prep4exam/views/feedbackmodule/formdash.dart';
+import 'package:prep4exam/views/Examportal/ExamDash.dart';
 
 void main() {
   runApp(MyApp());
@@ -39,30 +42,23 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // routes: {
-      //   '/':(context) => Dashboard(),
-      //   '/QuizHome': (context) => Home(),
-      // },
+       initialRoute: '/',
+      routes: {
+        '/':(context) =>  (_isLoggedIn ?? false) ? Dashboard() : Signin(),
+        '/QuizHome': (context) => Home(),
+        '/Dash':(context)=>Dashboard(),
+        
+      },
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: (_isLoggedIn ?? false) ? Dashboard() : Signin(),
-      // AnimatedSplashScreen(
+      // home: (_isLoggedIn ?? false) ? Dashboard() : Signin(),
+     
         
-      //     duration: 3000,
-      //     splash:  
-      //      Image.asset('assets/images/splash.jpg',
-      //       fit: BoxFit.fill,),
-           
-          
-      //     nextScreen: (_isLoggedIn ?? false) ? Dashboard() : Signin(),
-      //     splashTransition: SplashTransition.slideTransition,
-      //     pageTransitionType: PageTransitionType.leftToRight,
-         
-      //   ) 
+      
     );
   }
 }
